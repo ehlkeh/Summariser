@@ -4,11 +4,20 @@ const app = express();
 
 app.use(express.json());
 
-// TODO: Move API key to environment variable later
-const OPENAI_API_KEY = "UCSI25{sk-live-4xBq29JVh1mR7sA8LcdY92fTn8TmgA1Xp3Q2}";
+// Read the API key from environment variable
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+if (!OPENAI_API_KEY) {
+  console.error("ERROR: OPENAI_API_KEY not set in environment variables.");
+  process.exit(1);
+}
 
 app.post("/summarise", async (req, res) => {
   const { text } = req.body;
+
+  if (!text) {
+    return res.status(400).json({ error: "Missing 'text' in request body" });
+  }
 
   try {
     const response = await axios.post(
