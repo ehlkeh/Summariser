@@ -59,16 +59,6 @@ Example (curl):
 
 ---
 
-## Project Structure
-
-summariser/
-├── server.js
-├── package.json
-├── .gitignore
-└── README.md
-
----
-
 ## Notes
 
 - The endpoint path is /summarise and returns a 200 status on success.
